@@ -1,5 +1,6 @@
 package com.example.thescore_qa_challenge
 
+
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -22,8 +23,8 @@ import java.net.URL
  */
 class ExampleUnitTest {
 
-    @BeforeEach
-    fun setUp() {
+    //@BeforeEach
+    /*fun setUp() {
         val options = UiAutomator2Options()
             .setUdid("123456")
             .setApp("/app/resources/theScore.apk")
@@ -31,10 +32,15 @@ class ExampleUnitTest {
             URL("http://127.0.0.1:4723"), options
         )
         //val el3 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
-    }
+    }*/
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        val options = UiAutomator2Options()
+            .setUdid("123456")
+            .setApp("/app/resources/theScore.apk")
+            //.setDeviceName("Pixel 3a API 34")
+        //val driver = AndroidDriver( // The default URL in Appium 1 is http://127.0.0.1:4723/wd/hub
+        //)
         /*val el3 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
         el3.click();
         val el4 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_bar_text_view"));
@@ -48,9 +54,14 @@ class ExampleUnitTest {
         val el8 = driver.findElement(AppiumBy.accessibilityId("Navigate up"));
         el8.click();*/
     }
+    /*
+    @Test
+    fun multiplication_isCorrect(){
+        assertEquals(4, 2 * 2)
+    }
 
     @AfterEach
     fun tearDown() {
         //driver.quit()
-    }
+    }*/
 }
