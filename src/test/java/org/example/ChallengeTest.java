@@ -1,12 +1,8 @@
 package org.example;
 
-import io.appium.java_client.remote.options.BaseOptions;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumBy;
-import java.net.URL;
 
-import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -14,16 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.net.MalformedURLException;
-
-
-import static com.google.common.base.StandardSystemProperty.USER_DIR;
 
 public class ChallengeTest extends TestBase {
 
     private AndroidDriver driver;
+    public static final String TEAM_NAME = "Bayern Munich";
+
     @Test
-    public void sampleTest() {
+    public void teamSearch() {
         driver = getDriver();
         //Open app
         var el1 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
@@ -38,7 +32,7 @@ public class ChallengeTest extends TestBase {
                 "@resource-id=\"com.fivemobile.thescore:id/search_src_text\"]");
         var el5 = driver.findElement(AppiumBy.id(
                 "com.fivemobile.thescore:id/search_src_text"));
-        el5.sendKeys("Toronto Maple Leafs");
+        el5.sendKeys(TEAM_NAME);
         //Go to team page
         var el6 = driver.findElement(AppiumBy.androidUIAutomator(
                 "new UiSelector().className(\"android.widget.LinearLayout\").instance(11)"));
@@ -48,7 +42,7 @@ public class ChallengeTest extends TestBase {
         //Verify team page is correct
         var team_name = driver.findElement(AppiumBy.id(
                 "com.fivemobile.thescore:id/team_name"));
-        Assert.assertEquals(team_name.getText(),"Toronto Maple Leafs");
+        Assert.assertEquals(team_name.getText(), TEAM_NAME);
         //Go to team stats tab
         var el7 = driver.findElement(AppiumBy.accessibilityId("Team Stats"));
         el7.click();
@@ -58,7 +52,7 @@ public class ChallengeTest extends TestBase {
         Assert.assertTrue(el7.isSelected());
         team_name = driver.findElement(AppiumBy.id(
                 "com.fivemobile.thescore:id/team_name"));
-        Assert.assertEquals(team_name.getText(),"Toronto Maple Leafs");
+        Assert.assertEquals(team_name.getText(), TEAM_NAME);
         var stats_header = driver.findElement(AppiumBy.xpath(
                 "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/header_text\"]"));
         Assert.assertTrue(stats_header.getText().contains("STATS"));
@@ -70,7 +64,7 @@ public class ChallengeTest extends TestBase {
         var main_search_result = driver.findElement(AppiumBy.xpath(
                 "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/txt_name\"]"));
         System.out.println(main_search_result.getText());
-        Assert.assertEquals(main_search_result.getText(), "Toronto Maple Leafs");
+        Assert.assertEquals(main_search_result.getText(), TEAM_NAME);
     }
 
     public void waitForElement(AndroidDriver driver, String xpath){

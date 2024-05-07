@@ -17,6 +17,8 @@ public class TestBase {
     public void setUp() {
         caps = DriverOptions.AndroidBaseCapabilities();
         driver = new AndroidDriver(this.getUrl(), caps);
+        String apk_path = System.getProperty("user.dir")+"\\src\\test\\resources\\theScore.apk";
+        driver.installApp(apk_path);
     }
 
     @After
