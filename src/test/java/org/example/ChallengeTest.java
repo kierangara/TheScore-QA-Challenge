@@ -25,23 +25,52 @@ public class ChallengeTest extends TestBase {
     @Test
     public void sampleTest() {
         driver = getDriver();
+        //Open app
         var el1 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
         el1.click();
-        waitForElement(driver, "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/search_bar_text_view\"]");
-        var el4 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_bar_text_view"));
+        //Search for team
+        waitForElement(driver, "//android.widget.TextView[" +
+                "@resource-id=" + "\"com.fivemobile.thescore:id/search_bar_text_view\"]");
+        var el4 = driver.findElement(AppiumBy.id(
+                "com.fivemobile.thescore:id/search_bar_text_view"));
         el4.click();
-        waitForElement(driver, "//android.widget.AutoCompleteTextView[@resource-id=\"com.fivemobile.thescore:id/search_src_text\"]");
-        var el5 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_src_text"));
-        el5.sendKeys("Bayern");
-        var el6 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.LinearLayout\").instance(11)"));
+        waitForElement(driver, "//android.widget.AutoCompleteTextView[" +
+                "@resource-id=\"com.fivemobile.thescore:id/search_src_text\"]");
+        var el5 = driver.findElement(AppiumBy.id(
+                "com.fivemobile.thescore:id/search_src_text"));
+        el5.sendKeys("Toronto Maple Leafs");
+        //Go to team page
+        var el6 = driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiSelector().className(\"android.widget.LinearLayout\").instance(11)"));
         el6.click();
-        waitForElement(driver, "//android.widget.TextView[@text=\"TEAM STATS\"]");
+        waitForElement(driver, "//android.widget.TextView[" +
+                "@text=\"TEAM STATS\"]");
+        //Verify team page is correct
+        var team_name = driver.findElement(AppiumBy.id(
+                "com.fivemobile.thescore:id/team_name"));
+        Assert.assertEquals(team_name.getText(),"Toronto Maple Leafs");
+        //Go to team stats tab
         var el7 = driver.findElement(AppiumBy.accessibilityId("Team Stats"));
         el7.click();
-        waitForElement(driver, "//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+        waitForElement(driver, "//android.widget.ImageButton[" +
+                "@content-desc=\"Navigate up\"]");
+        //Check stats tab properly displayed
+        Assert.assertTrue(el7.isSelected());
+        team_name = driver.findElement(AppiumBy.id(
+                "com.fivemobile.thescore:id/team_name"));
+        Assert.assertEquals(team_name.getText(),"Toronto Maple Leafs");
+        var stats_header = driver.findElement(AppiumBy.xpath(
+                "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/header_text\"]"));
+        Assert.assertTrue(stats_header.getText().contains("STATS"));
+        //Use back functionality, returns to search page
         var el8 = driver.findElement(AppiumBy.accessibilityId("Navigate up"));
         el8.click();
-        Assert.assertEquals(4,2+2);
+        //Verify correctly returned to search page
+        Assert.assertTrue(el6.isDisplayed());
+        var main_search_result = driver.findElement(AppiumBy.xpath(
+                "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/txt_name\"]"));
+        System.out.println(main_search_result.getText());
+        Assert.assertEquals(main_search_result.getText(), "Toronto Maple Leafs");
     }
 
     public void waitForElement(AndroidDriver driver, String xpath){
