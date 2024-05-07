@@ -35,6 +35,16 @@ public class ChallengeTest {
     public void sampleTest() {
         var el1 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
         el1.click();
+        /*var el4 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_bar_text_view"));
+        el4.click();
+        var el5 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_src_text"));
+        el5.sendKeys("Bayern");
+        var el6 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.LinearLayout\").instance(11)"));
+        el6.click();
+        var el7 = driver.findElement(AppiumBy.accessibilityId("Team Stats"));
+        el7.click();
+        var el8 = driver.findElement(AppiumBy.accessibilityId("Navigate up"));
+        el8.click();*/
         Assert.assertEquals(4,2+2);
     }
 
