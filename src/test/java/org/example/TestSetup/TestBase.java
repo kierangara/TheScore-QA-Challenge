@@ -1,7 +1,6 @@
-package org.example;
+package org.example.TestSetup;
 
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.options.BaseOptions;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.remote.DesiredCapabilities;

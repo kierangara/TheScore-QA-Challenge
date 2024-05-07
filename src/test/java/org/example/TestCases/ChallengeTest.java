@@ -1,8 +1,9 @@
-package org.example;
+package org.example.TestCases;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumBy;
 
+import org.example.TestSetup.TestBase;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -20,7 +21,7 @@ public class ChallengeTest extends TestBase {
     public void teamSearch() {
         driver = getDriver();
         //Open app
-        var el1 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
+        var el1 = driver.findElement(AppiumBy.accessibilityId("theScore"));
         el1.click();
         //Search for team
         waitForElement(driver, "//android.widget.TextView[" +
@@ -68,7 +69,7 @@ public class ChallengeTest extends TestBase {
     }
 
     public void waitForElement(AndroidDriver driver, String xpath){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(By
                 .xpath(xpath)));
     }
