@@ -15,24 +15,12 @@ import java.net.MalformedURLException;
 
 import static com.google.common.base.StandardSystemProperty.USER_DIR;
 
-public class ChallengeTest {
+public class ChallengeTest extends TestBase {
 
     private AndroidDriver driver;
-
-    @Before
-    public void setUp() {
-        var options = new BaseOptions()
-                .amend("platformName", "Android")
-                .amend("appium:automationName", "UiAutomator2")
-                .amend("appium:ensureWebviewsHavePages", true)
-                .amend("appium:nativeWebScreenshot", true)
-                .amend("appium:newCommandTimeout", 3600)
-                .amend("appium:connectHardwareKeyboard", true);
-        driver = new AndroidDriver(this.getUrl(), options);
-    }
-
     @Test
     public void sampleTest() {
+        driver = getDriver();
         var el1 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
         el1.click();
         /*var el4 = driver.findElement(AppiumBy.id("com.fivemobile.thescore:id/search_bar_text_view"));
@@ -48,17 +36,4 @@ public class ChallengeTest {
         Assert.assertEquals(4,2+2);
     }
 
-    @After
-    public void tearDown() {
-        //driver.quit();
-    }
-
-    private URL getUrl() {
-        try {
-            return new URL("http://127.0.0.1:4723");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
