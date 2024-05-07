@@ -14,7 +14,8 @@ import org.junit.Before
 //import org.junit.Test
 //import org.junit.runner.RunWith
 import java.net.URL
-import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.MutableCapabilities
+import org.openqa.selenium.remote.DesiredCapabilities
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -24,14 +25,14 @@ import org.openqa.selenium.MutableCapabilities;
 
 
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class ExampleInstrumentedTest: TestBase() {
+    override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabilities()
+    //private val capabilities = MutableCapabilities()
+    //private lateinit var driver: AndroidDriver
 
-    private val capabilities = MutableCapabilities()
-    private lateinit var driver: AndroidDriver
-
-    @Before
+    /*@Before
     fun setup() {
-        // Set up Appium capabilities
+        /*// Set up Appium capabilities
         capabilities.setCapability("deviceName","emulator-5554")
         capabilities.setCapability("platformName","Android")
         capabilities.setCapability("platformVersion","13")
@@ -39,8 +40,8 @@ class ExampleInstrumentedTest {
 
         // Start the Appium server
         val serverUrl = URL("http://localhost:4723/wd/hub")
-        driver = AndroidDriver(serverUrl, capabilities)
-    }
+        driver = AndroidDriver(serverUrl, capabilities)*/
+    }*/
 
     @Test
     fun openTheScoreApp() {

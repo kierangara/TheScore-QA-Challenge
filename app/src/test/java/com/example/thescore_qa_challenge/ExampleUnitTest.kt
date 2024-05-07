@@ -14,6 +14,9 @@ import org.junit.jupiter.api.BeforeEach
 //import org.junit.jupiter.api.Test
 import org.openqa.selenium.*
 import java.net.URL
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.support.ui.WebDriverWait
+import java.time.Duration
 
 
 /**
@@ -21,8 +24,8 @@ import java.net.URL
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
-
+class ExampleUnitTest: TestBase() {
+    override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabilities()
     //@BeforeEach
     /*fun setUp() {
         val options = UiAutomator2Options()
@@ -34,10 +37,8 @@ class ExampleUnitTest {
         //val el3 = driver.findElement(AppiumBy.accessibilityId("Predicted app: theScore"));
     }*/
     @Test
-    fun addition_isCorrect() {
-        val options = UiAutomator2Options()
-            .setUdid("123456")
-            .setApp("/app/resources/theScore.apk")
+    fun appium_test() {
+        assertEquals(4, 2 + 2)
             //.setDeviceName("Pixel 3a API 34")
         //val driver = AndroidDriver( // The default URL in Appium 1 is http://127.0.0.1:4723/wd/hub
         //)
