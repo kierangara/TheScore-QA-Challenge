@@ -1,0 +1,77 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{TheScore QA Challenge Test Specification}
+\author{Kieran Gara}
+\date{May 7, 2024}
+
+\begin{document}
+\maketitle
+
+This document contains the test specification, rationale and report for the test case created for theScore QA Engineer Challenge.
+
+\section{Test Specification}
+\subsection{Navigation to Team Page}
+\textbf{Prerequisites}:
+
+\begin{itemize}
+    \item Appium 2
+    \item Java 11 or higher
+    \item Maven
+    \item Node.js
+    \item Android SDK
+    \item A local Android emulator
+\end{itemize}
+\textbf{Initial state:}
+\begin{itemize}
+    \item theScore APK already installed on emulator
+    \item theScore app welcome process complete
+\end{itemize}
+
+\noindent\textbf{Specification}:
+
+\begin{enumerate}
+    \item Open theScore app
+    \item Enter the name of a sports team into the search bar ("Bayern Munich" used for this test)
+    \item Select the first result produced by the search
+    \item Test: Verify the team name on the current page matches that of the team chosen for the test
+    \item Navigate to the "Team Stats" sub-tab of that team
+    \item Test: Verify the current tab is actually the "Team Stats" tab
+    \item Test: Verify the team name still matches
+    \item Test: Verify the header of the page details contains "STATS"
+    \item Use the "Back Navigation" user interface tool
+    \item Test: Verify the search bar is displayed
+    \item Test: Verify the first result matches the team chosen for the test
+\end{enumerate}
+
+\noindent\textbf{Rationale}:
+
+The test procedure was derived from the instructions given for the challenge. The test navigates to a team's page, then to one of the sub-tabs and then use the backward navigation functionality as requested. It was chosen that the app should operate from the initial state of the app's welcome process already being complete so as to shorten the overall test and focus on the specified features. 
+
+As for the rationale behind the verification's an overall attempt was made to utilize features that are common regardless of the league from which the chosen team originates. This will allow the current test to be more easily generalized to various types of teams. Features used for verification also had to be chosen such that they are unlikely to change with time so that the test suite does not have to be updated too frequently. As such the team name, page headers and features (such as search bars) were used most frequently to determine that the correct page was being displayed.
+
+\section{Test Report}
+\subsection{Navigation to Team Page}
+\textbf{Test Result:} All checks passed. Success.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image.png}
+    \caption{Test result}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\end{document}
