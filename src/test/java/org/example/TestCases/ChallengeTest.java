@@ -1,16 +1,10 @@
 package org.example.TestCases;
 
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.AppiumBy;
 
 import org.example.TestSetup.TestBase;
 import org.junit.Test;
-import org.junit.Assert;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import org.example.NavigationTools.*;
 
 public class ChallengeTest extends TestBase {
 
@@ -20,58 +14,26 @@ public class ChallengeTest extends TestBase {
     @Test
     public void teamSearch() {
         driver = getDriver();
-        //Open app
-        var el1 = driver.findElement(AppiumBy.accessibilityId("theScore"));
-        el1.click();
-        //Search for team
-        waitForElement(driver, "//android.widget.TextView[" +
-                "@resource-id=" + "\"com.fivemobile.thescore:id/search_bar_text_view\"]");
-        var el4 = driver.findElement(AppiumBy.id(
-                "com.fivemobile.thescore:id/search_bar_text_view"));
-        el4.click();
-        waitForElement(driver, "//android.widget.AutoCompleteTextView[" +
-                "@resource-id=\"com.fivemobile.thescore:id/search_src_text\"]");
-        var el5 = driver.findElement(AppiumBy.id(
-                "com.fivemobile.thescore:id/search_src_text"));
-        el5.sendKeys(TEAM_NAME);
-        //Go to team page
-        var el6 = driver.findElement(AppiumBy.androidUIAutomator(
-                "new UiSelector().className(\"android.widget.LinearLayout\").instance(11)"));
-        el6.click();
-        waitForElement(driver, "//android.widget.TextView[" +
-                "@text=\"TEAM STATS\"]");
-        //Verify team page is correct
-        var team_name = driver.findElement(AppiumBy.id(
-                "com.fivemobile.thescore:id/team_name"));
-        Assert.assertEquals(team_name.getText(), TEAM_NAME);
-        //Go to team stats tab
-        var el7 = driver.findElement(AppiumBy.accessibilityId("Team Stats"));
-        el7.click();
-        waitForElement(driver, "//android.widget.ImageButton[" +
-                "@content-desc=\"Navigate up\"]");
-        //Check stats tab properly displayed
-        Assert.assertTrue(el7.isSelected());
-        team_name = driver.findElement(AppiumBy.id(
-                "com.fivemobile.thescore:id/team_name"));
-        Assert.assertEquals(team_name.getText(), TEAM_NAME);
-        var stats_header = driver.findElement(AppiumBy.xpath(
-                "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/header_text\"]"));
-        Assert.assertTrue(stats_header.getText().contains("STATS"));
-        //Use back functionality, returns to search page
-        var el8 = driver.findElement(AppiumBy.accessibilityId("Navigate up"));
-        el8.click();
-        //Verify correctly returned to search page
-        Assert.assertTrue(el6.isDisplayed());
-        var main_search_result = driver.findElement(AppiumBy.xpath(
-                "//android.widget.TextView[@resource-id=\"com.fivemobile.thescore:id/txt_name\"]"));
-        System.out.println(main_search_result.getText());
-        Assert.assertEquals(main_search_result.getText(), TEAM_NAME);
-    }
 
-    public void waitForElement(AndroidDriver driver, String xpath){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(By
-                .xpath(xpath)));
+        //Open the app and search interface
+        HomePageTools homePage = new HomePageTools(driver);
+        homePage.openApp();
+        homePage.clickSearchBar();
+
+        //Navigate to a team page
+        SearchPageTools searchPage = new SearchPageTools(driver);
+        searchPage.search(TEAM_NAME);
+        searchPage.selectSearchResult();
+
+        TeamPageTools teamPage = new TeamPageTools(driver, TEAM_NAME);
+        //Verify the expected page opens
+        teamPage.verifyTeamName();
+        //Go to the sub-tab Team Stats and verify the correct tab and team data are displayed
+        teamPage.verifyTeamStats();
+
+        //Verify the back navigation returns to the previous page correctly
+        teamPage.goBack();
+        searchPage.verifyBackNavigation(TEAM_NAME);
     }
 
 }
