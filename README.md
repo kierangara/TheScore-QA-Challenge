@@ -9,7 +9,7 @@ https://github.com/kierangara/TheScore-QA-Challenge/blob/main/docs/TestSpec/TheS
 # Prerequisites
 - Java 11 or higher
 - Maven
-- Appium with UiAutomator2 driver
+- Appium 2 with UiAutomator2 driver
 - Nodejs
 - Android SDK
 - A local emulator
