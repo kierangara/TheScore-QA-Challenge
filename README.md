@@ -19,11 +19,11 @@ You must set the JAVA_HOME environment variable to the location in which the SDK
 - Maven can be downloaded from the Apache Maven website https://maven.apache.org/download.cgi . See website instructions for installation.
 - Appium can be installed by entering the following command in the terminal:
 ```console
-npm install -g appium-doctor
+npm install -g appium
 ```
 - The UiAutomator2 driver for Appium can be installed using the following command in the terminal:
 ```console
-npm install -g appium-doctor
+appium driver install uiautomator2
 ```
 - Nodejs can be installed using the node version manager for windows, available at https://github.com/coreybutler/nvm-windows/releases
 - The Android SDK can be installed from the Android website or by installing Android Studio through which you can also set up an Android Virtual Device (avd) for use as the local emulator. Ensure the ANDROID_HOME environment variable is set to the location of the SDK.
